@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 2408;
 
 // Middleware
-app.use(cors({ origin: "http://localhost:2004" })); // Chỉ cho Client 2004 vào
+app.use(
+  cors({
+    origin: ["http://localhost:2004", "https://cap-portfolio-blush.vercel.app"],
+  })
+);
 app.use(express.json());
 
 // 1. KẾT NỐI MONGODB
