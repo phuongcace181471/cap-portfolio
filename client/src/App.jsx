@@ -95,13 +95,35 @@ function App() {
 
   useEffect(() => {
     fetch("https://cap-portfolio-api.onrender.com/api/profile")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((data) => {
         setProfile(data);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Profile fetch error:", err);
+        // Fallback data nếu không kết nối được server
+        setProfile({
+          name: "Chương Anh Phương",
+          title: "Fullstack Web Developer",
+          bio: "Sinh viên đam mê lập trình, thích Gấu trúc và Code dạo.",
+          skills: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
+          projects: [
+            {
+              name: "CAP Portfolio RPG",
+              desc: "Web giới thiệu bản thân phong cách Game",
+              tech: "MERN Stack",
+            },
+          ],
+          socials: {
+            github: "https://github.com/phuongcace181471",
+            email: "anhphuong2408st@gmail.com",
+            facebook: "fb.com/ChuongAnhPhuong",
+          },
+        });
         setIsLoading(false);
       });
   }, []);

@@ -10,7 +10,16 @@ const app = express();
 const PORT = process.env.PORT || 2408;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:2004",
+      "https://cap-portfolio-api.onrender.com",
+      "https://cap-portfolio-blush.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // 1. KẾT NỐI MONGODB
