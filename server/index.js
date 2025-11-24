@@ -79,15 +79,20 @@ app.post("/api/contact", async (req, res) => {
 
     // 2. Cấu hình Nodemailer (SỬA LẠI ĐOẠN NÀY)
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com", // Dùng host trực tiếp thay vì service: 'gmail'
+      port: 465, // Cổng SSL (Thường ổn định hơn 587 trên Render)
+      secure: true, // Dùng SSL
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      // 👇 THÊM ĐOẠN NÀY ĐỂ FIX LỖI SSL
       tls: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: false, // Vẫn giữ cái này để tránh lỗi SSL
       },
+      // 👇 Tăng thời gian chờ lên (Chống lỗi Timeout)
+      connectionTimeout: 10000, // Chờ 10 giây kết nối
+      greetingTimeout: 10000, // Chờ 10 giây chào hỏi server
+      socketTimeout: 10000, // Chờ 10 giây truyền tin
     });
 
     // 3. Gửi mail
