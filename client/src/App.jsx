@@ -591,7 +591,7 @@ function App() {
       </div>
 
       {/* Map */}
-      <div className="w-full flex-1 flex items-center justify-center z-10 relative pointer-events-none lg:pointer-events-auto px-0 overflow-hidden mt-20 lg:mt-0">
+      <div className="w-full flex-1 flex items-center justify-center z-10 relative pointer-events-none lg:pointer-events-auto px-0 overflow-hidden mt-24 lg:mt-0">
         <div className="relative group shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full lg:w-auto transform scale-100 lg:scale-125 origin-center transition-transform duration-500 ease-out rounded-none lg:rounded-lg overflow-hidden border-0 lg:border-4 border-slate-700/50 pointer-events-auto">
           <GameMap mapMatrix={mapMatrix} />
 

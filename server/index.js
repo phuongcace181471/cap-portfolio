@@ -10,11 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 2408;
 
 // Middleware
-app.use(
-  cors({
-    origin: ["http://localhost:2004", "https://cap-portfolio-blush.vercel.app"],
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 // 1. KẾT NỐI MONGODB
@@ -60,9 +56,9 @@ app.get("/api/seed", async (req, res) => {
         },
       ],
       socials: {
-        github: "https://github.com/cap",
-        email: "cap@example.com",
-        facebook: "fb.com/cap",
+        github: "https://github.com/phuongcace181471",
+        email: "anhphuong2408st@gmail.com",
+        facebook: "fb.com/ChuongAnhPhuong",
       },
     });
 
