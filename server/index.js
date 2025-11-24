@@ -71,7 +71,7 @@ app.get("/api/seed", async (req, res) => {
 
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
-
+  console.log(`📨 Đang gửi mail từ: ${name}...`);
   try {
     // 1. Lưu vào Database trước (Backup)
     const newMessage = new Message({ name, email, message });
@@ -79,20 +79,21 @@ app.post("/api/contact", async (req, res) => {
 
     // 2. Cấu hình Nodemailer (SỬA LẠI ĐOẠN NÀY)
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com", // Dùng host trực tiếp thay vì service: 'gmail'
-      port: 465, // Cổng SSL (Thường ổn định hơn 587 trên Render)
-      secure: true, // Dùng SSL
+      host: "smtp.gmail.com",
+      port: 587, // Dùng cổng 587 (TLS) thay vì 465
+      secure: false, // false cho cổng 587
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
       tls: {
-        rejectUnauthorized: false, // Vẫn giữ cái này để tránh lỗi SSL
+        rejectUnauthorized: false,
       },
-      // 👇 Tăng thời gian chờ lên (Chống lỗi Timeout)
-      connectionTimeout: 10000, // Chờ 10 giây kết nối
-      greetingTimeout: 10000, // Chờ 10 giây chào hỏi server
-      socketTimeout: 10000, // Chờ 10 giây truyền tin
+      // 👇 CẤU HÌNH QUAN TRỌNG ĐỂ FIX TIMEOUT
+      family: 4, // 🌟 Ép buộc dùng IPv4 (Fix lỗi chính ở đây)
+      connectionTimeout: 20000, // Tăng lên 20 giây
+      greetingTimeout: 20000, // Tăng lên 20 giây
+      socketTimeout: 20000, // Tăng lên 20 giây
     });
 
     // 3. Gửi mail
@@ -105,7 +106,7 @@ app.post("/api/contact", async (req, res) => {
 
     res.json({ success: true, msg: "Đã gửi mail thành công!" });
   } catch (err) {
-    console.error("Lỗi gửi mail:", err);
+    console.error("🔴 Lỗi gửi mail chi tiết:", err);
     res
       .status(500)
       .json({ success: false, msg: "Lỗi server, vui lòng thử lại." });

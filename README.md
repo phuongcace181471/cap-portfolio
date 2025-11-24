@@ -4,7 +4,7 @@
 
 Chào mừng đến với **CAP's Adventure**! Đây không phải là một trang CV hay Portfolio dạng tĩnh nhàm chán. Đây là một thế giới RPG 2D thu nhỏ, nơi bạn sẽ nhập vai nhân vật chính, thám hiểm bản đồ, né tránh Bugs và thu thập thông tin về **Chương Anh Phương (CAP)**.
 
-[![Live Demo](https://img.shields.io/badge/DEMO-PLAY%20NOW-success?style=for-the-badge&logo=vercel)](https://cap-portfolio.vercel.app)
+[![Live Demo](https://cap-portfolio-blush.vercel.app/)](https://cap-portfolio-blush.vercel.app/)
 
 ## 🌟 Tính năng nổi bật (Features)
 
