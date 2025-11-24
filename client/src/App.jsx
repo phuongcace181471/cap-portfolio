@@ -94,7 +94,7 @@ function App() {
   );
 
   useEffect(() => {
-    fetch("http://localhost:2408/api/profile")
+    fetch("https://cap-portfolio-api.onrender.com/api/profile")
       .then((res) => res.json())
       .then((data) => {
         setProfile(data);
@@ -494,11 +494,14 @@ function App() {
     setSendStatus(null);
 
     try {
-      const response = await fetch("http://localhost:2408/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm),
-      });
+      const response = await fetch(
+        "https://cap-portfolio-api.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactForm),
+        }
+      );
 
       const data = await response.json();
 
